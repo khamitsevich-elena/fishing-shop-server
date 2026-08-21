@@ -45,8 +45,8 @@ app.use(requestLogger);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
-// Swagger UI — only in development
-if (process.env.NODE_ENV !== 'production') {
+// Swagger UI — доступен если ENABLE_SWAGGER=true или в development
+if (process.env.ENABLE_SWAGGER === 'true' || process.env.NODE_ENV !== 'production') {
   setupSwagger(app);
 }
 
