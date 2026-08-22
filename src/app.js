@@ -3,10 +3,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import * as Sentry from '@sentry/node';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import { apiLimiter, authLimiter } from './middleware/rateLimit.js';
 import { requestLogger } from './middleware/requestLogger.js';
 import { setupSwagger } from './config/swagger.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import authRoutes from './routes/auth.routes.js';
 import categoryRoutes from './routes/category.routes.js';
@@ -42,6 +46,9 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
+
+// Static files (product images)
+app.use('/images', express.static(join(__dirname, '../public/images')));
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
