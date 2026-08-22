@@ -47,9 +47,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
 
-// Static files (product images)
-app.use('/images', express.static(join(__dirname, '../public/images')));
-
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
 // Swagger UI — доступен если ENABLE_SWAGGER=true или в development
