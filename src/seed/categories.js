@@ -6,7 +6,7 @@ export default [
   ]},
   { name: 'Катушки', slug: 'reel', icon: '⚙️', children: [
     { name: 'Безынерционные', slug: 'spinning-reel' },
-    { name: 'Инерционные', slug: 'baitcast-reel' },
+    { name: 'Инерционные', slug: 'inertial-reel' },
   ]},
   { name: 'Приманки', slug: 'lure', icon: '🪱', children: [
     { name: 'Воблеры', slug: 'wobbler' },
