@@ -2,6 +2,7 @@ import Category from '../models/Category.js';
 import Product from '../models/Product.js';
 
 export async function list(req, res, next) {
+  console.log('GET /api/products called');
   try {
     const { category, fish, method, season, brand, inStock, hasDiscount, priceFrom, priceTo, q, sort, page = 1, limit = 20 } = req.query;
 

@@ -1,10 +1,10 @@
-import redis from '../config/redis.js';
+import redis, { isRedisReady } from '../config/redis.js';
 
 const DEFAULT_TTL = 60;
 
 export function cache(ttl = DEFAULT_TTL) {
   return async (req, res, next) => {
-    if (req.method !== 'GET') return next();
+    if (req.method !== 'GET' || !isRedisReady()) return next();
 
     const key = `cache:${req.originalUrl}`;
     try {
@@ -28,6 +28,7 @@ export function cache(ttl = DEFAULT_TTL) {
 }
 
 export async function clearCache(pattern) {
+  if (!isRedisReady()) return;
   try {
     const keys = await redis.keys(pattern);
     if (keys.length) await redis.del(...keys);
